@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Lyle's True Friend Quiz</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,10 +22,38 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+        <div id="quiz-title">
+            <h1>Lyle's True Friend Quiz</h1>
+        </div>
+        <div id="quiz">
+            <div class="quiz-question">
 
+            </div>
+            <div class="quiz-choices">
+                <form>
+                    <input id="choice1" type="radio" name="question" value="0" checked="checked">
+                    <label for="choice1"></label><br>
+                    <input id="choice2" type="radio" name="question" value="1">
+                    <label for="choice2"></label><br>
+                    <input id="choice3" type="radio" name="question" value="2">
+                    <label for="choice3"></label><br>
+                    <input id="choice4" type="radio" name="question" value="3">
+                    <label for="choice4"></label><br>
+                </form>
+            </div>
+        </div>
+        <div id="btn-next">
+            <button>Next</button>
+        </div>
+        <div id="btn-prev">
+            <button>Prev</button>
+        </div>
+        <div id="btn-submit">
+            <input type="submit" value="Get Your Grade">
+        </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="jquery/jquery-1.11.2.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 

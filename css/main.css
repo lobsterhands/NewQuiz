@@ -94,13 +94,63 @@ textarea {
 }
 
 /* ==========================================================================
-   Author's custom styles
+   Lobsterhands' custom styles
    ========================================================================== */
 
+#quiz-title {
+    margin-top: 40px;
+}
 
+h1 {
+    margin: 0 auto;
+    text-align: center;
+}
 
+#quiz {
+    margin: 20px auto;
+    width: 450px;
+    height: 300px;
+    border: 1px solid #000000;
+    background: #ffffff;
+}
 
+.quiz-question {
+    margin: auto;
+    text-align: center;
+    display: none;
+}
 
+.quiz-choices {
+    display: none;
+    margin-left: 3em;
+}
+
+input[type=radio] {
+    width: 28px;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.unhide {
+    display: block
+}
+
+#btn-next {
+    text-align: center;
+    margin-left: 20em;
+
+}
+
+#btn-prev {
+    text-align: center;
+    margin-left: -20em;
+    margin-top: -24px;
+}
+
+#btn-submit {
+    margin: auto;
+    text-align: center;
+}
 
 
 
