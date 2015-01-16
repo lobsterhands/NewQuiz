@@ -131,37 +131,53 @@ input[type=radio] {
     padding: 10px;
 }
 
-.unhide {
-    display: block
-}
-
+/* @lob Next and Prev buttons need to be stylized so they are only clickable
+*  with a mouseover! Currently, I can click 'Prev' from the right side of Next
+*/
 #btn-next {
     text-align: center;
     margin-left: 20em;
-
 }
 
 #btn-prev {
-    text-align: center;
+   text-align: center;
     margin-left: -20em;
     margin-top: -24px;
 }
 
 #btn-submit {
+    display: none;
     margin: auto;
     text-align: center;
 }
 
+#finish {
+    display: none;
+    margin: 7em auto;
+    text-align: center;
+}
 
+#grade {
+    display: none;
+    margin: 5em auto;
+    text-align: center;
+}
 
-
-
-
-
-
-
-
-
+#zero,
+#one,
+#two,
+#three,
+#four,
+#five,
+#six,
+#seven,
+#eight,
+#nine,
+#ten {
+    display: none;
+    margin: auto;
+    text-align: center;
+}
 
 /* ==========================================================================
    Helper classes
