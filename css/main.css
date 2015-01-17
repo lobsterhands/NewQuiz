@@ -177,6 +177,7 @@ input[type=radio] {
     display: none;
     margin: auto;
     text-align: center;
+    font-family: arial;
 }
 
 /* ==========================================================================
