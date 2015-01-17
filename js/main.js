@@ -60,32 +60,36 @@ questions.forEach(function(element){
     answerKey.push(element.answer);
 });
 
-console.log(answerKey);
-
 $(document).ready( function() {
 
     var quiz = $("#quiz");
 
-    $('#quiz-form').on('change', function() {
-        selected = ($('input[name=question]:checked').val());
-    });
+    function getSelected() {
+        selected = false;
+        $('#quiz-form').on('change', function() {
+            selected = ($('input[name=question]:checked').val());
+        });
+    }
+    getSelected();
 
-    // @lob Add functionality to reset :checked after each Next button, but keep selected
-    // answers in memory to be shown when Prev button is used
+    // @lob Keep selected answers in memory to be shown when Prev button is used; currently,
+    // it resets it to 'checked', false
 
     // @lob Add checkbox verification; Next button only advances if an answer is selected;
     // otherwise, alert error
 
+    // @lob Add missed questions review after grade is shown
+
     $('#btn-next').on('click', function() {
         if (i < answerKey.length-1) {
-            if (!isNaN(selected)) {
+            if (selected) {
                 userAnswer.splice(i, 1, selected);
                 i += 1;
                 quiz.find('.quiz-question').show().html('<br>' + '<h2>' + questions[i].question + '</h2>');
-                $('#choice1').next().html('<strong>' + questions[i].choices[0] + '</strong>').addClass('checked');
-                $('#choice2').next().html('<strong>' + questions[i].choices[1] + '</strong>');
-                $('#choice3').next().html('<strong>' + questions[i].choices[2] + '</strong>');
-                $('#choice4').next().html('<strong>' + questions[i].choices[3] + '</strong>');
+                $('#choice1').prop('checked', false).next().html('<strong>' + questions[i].choices[0] + '</strong>');
+                $('#choice2').prop('checked', false).next().html('<strong>' + questions[i].choices[1] + '</strong>');
+                $('#choice3').prop('checked', false).next().html('<strong>' + questions[i].choices[2] + '</strong>');
+                $('#choice4').prop('checked', false).next().html('<strong>' + questions[i].choices[3] + '</strong>');
             } else {
                 alert('Please select an answer.');
             }
@@ -98,7 +102,9 @@ $(document).ready( function() {
             $("#btn-prev").hide();
             $("#btn-submit").show();
             }
+        getSelected();
     });
+
 
     $('#btn-prev').on('click', function() {
         if (i > 0) {
@@ -112,13 +118,10 @@ $(document).ready( function() {
     });
 
     $('#btn-submit').on('click', function() {
+        // @lob Update this loop as an array.forEach
         for (k = 0; k < answerKey.length; k++) {
-            console.log('Starting score ' + score);
             if (answerKey[k] != userAnswer[k]) {
                 score -= 1;
-                console.log('You missed one. Current score: ' + score);
-            } else {
-                console.log(score);
             }
         }
         $('#btn-submit').hide();
