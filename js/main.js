@@ -1,5 +1,7 @@
 var $,
     i,
+    j,
+    k,
     questions,
     answerKey,
     userAnswer,
@@ -54,10 +56,11 @@ userAnswer = [];
 i = 0;
 score = 10;
 
-// Build answerKey array from questions["answer"]
-for (var i = 0; i < questions.length; i++) {
-    answerKey.push(questions[i].answer);
-}
+questions.forEach(function(element){
+    answerKey.push(element.answer);
+});
+
+console.log(answerKey);
 
 $(document).ready( function() {
 
@@ -109,9 +112,9 @@ $(document).ready( function() {
     });
 
     $('#btn-submit').on('click', function() {
-        for (var i = 0; i < answerKey.length; i++) {
+        for (k = 0; k < answerKey.length; k++) {
             console.log('Starting score ' + score);
-            if (answerKey[i] != userAnswer[i]) {
+            if (answerKey[k] != userAnswer[k]) {
                 score -= 1;
                 console.log('You missed one. Current score: ' + score);
             } else {
@@ -145,9 +148,7 @@ $(document).ready( function() {
         } else {
             $("#zero").show();
         }
-
     });
-
 
     quiz.find('.quiz-choices').show();
     quiz.find('.quiz-question').show().html('<br>' + '<h2>' + questions[i].question + '</h2>');
@@ -155,7 +156,4 @@ $(document).ready( function() {
     $('#choice2').next().html('<strong>'+questions[i].choices[1]+'</strong>');
     $('#choice3').next().html('<strong>'+questions[i].choices[2]+'</strong>');
     $('#choice4').next().html('<strong>'+questions[i].choices[3]+'</strong>');
-
-
 });
-
