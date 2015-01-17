@@ -97,8 +97,17 @@ textarea {
    Lobsterhands' custom styles
    ========================================================================== */
 
+/* @lob Get rid of text highlighting due to misclicks */
+
+body {
+    background: #885D33;
+    user-select: none;
+}
+
 #quiz-title {
     margin-top: 40px;
+    color: #EBCFB4;
+
 }
 
 h1 {
@@ -131,24 +140,39 @@ input[type=radio] {
     padding: 10px;
 }
 
+#buttons {
+    margin: auto;
+    max-width: 450px;
+}
+
 /* @lob Next and Prev buttons need to be stylized so they are only clickable
 *  with a mouseover! Currently, I can click 'Prev' from the right side of Next
 */
 #btn-next {
-    text-align: center;
-    margin-left: 20em;
+    float: right;
 }
 
 #btn-prev {
-   text-align: center;
-    margin-left: -20em;
-    margin-top: -24px;
+    float: left;
 }
 
 #btn-submit {
     display: none;
     margin: auto;
     text-align: center;
+}
+
+#btn-next .btn,
+#btn-prev .btn {
+    margin: auto;
+    clear: both;
+    width: 4em;
+    background: #CA6808;
+
+}
+
+#btn-next .btn {
+
 }
 
 #finish {
