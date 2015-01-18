@@ -54,9 +54,7 @@ questions = [
 answerKey = [];
 userAnswer = [];
 i = 0;
-
-// @lob Change score to be pulled from questions.length;
-score = 10;
+score = questions.length;
 
 questions.forEach(function(element){
     answerKey.push(element.answer);
@@ -81,6 +79,15 @@ $(document).ready( function() {
     // otherwise, alert error
 
     // @lob Add missed questions review after grade is shown
+
+    // @lob Fix navigation history; if userAnswer[i] exists, that radio checkbox should be checked;
+    // Currently, if you go back to a question but don't change the radio selection, the
+    // 'please select an answer' msg is displayed
+
+    // @Lob add 'are you sure' button before the end of the quiz.
+
+    // @Lob add 'reset' button after grade is shown
+
 var turd = true;
     $('#btn-next').on('click', function() {
         if (i < answerKey.length-1) {
