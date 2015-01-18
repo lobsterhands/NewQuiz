@@ -145,10 +145,12 @@ input[type=radio] {
 
 #btn-next,
 #btn-finish {
+    display: none;
     float: right;
 }
 
 #btn-prev {
+    display: none;
     float: left;
 }
 
@@ -176,10 +178,6 @@ input[type=radio] {
 #btn-next .btn,
 #btn-prev .btn {
     background: #CA6808;
-}
-
-#btn-finish {
-    display: none;
 }
 
 #btn-finish .btn {
