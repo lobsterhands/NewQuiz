@@ -33,7 +33,7 @@ questions = [
     choices: ["Landlocked", "Ambassador", "Moonbeam", "Young Man Winter"],
     answer:1
     },
-    {question: "How many siblings to I have?",
+    {question: "How many siblings do I have?",
     choices: ["0", "1", "3", "4"],
     answer:3
     },
@@ -54,6 +54,8 @@ questions = [
 answerKey = [];
 userAnswer = [];
 i = 0;
+
+// @lob Change score to be pulled from questions.length;
 score = 10;
 
 questions.forEach(function(element){
@@ -79,17 +81,17 @@ $(document).ready( function() {
     // otherwise, alert error
 
     // @lob Add missed questions review after grade is shown
-
+var turd = true;
     $('#btn-next').on('click', function() {
         if (i < answerKey.length-1) {
             if (selected) {
                 userAnswer.splice(i, 1, selected);
                 i += 1;
                 quiz.find('.quiz-question').show().html('<br>' + '<h2>' + questions[i].question + '</h2>');
-                $('#choice1').prop('checked', false).next().html('<strong>' + questions[i].choices[0] + '</strong>');
-                $('#choice2').prop('checked', false).next().html('<strong>' + questions[i].choices[1] + '</strong>');
-                $('#choice3').prop('checked', false).next().html('<strong>' + questions[i].choices[2] + '</strong>');
-                $('#choice4').prop('checked', false).next().html('<strong>' + questions[i].choices[3] + '</strong>');
+                $('#choice0').prop('checked', false).next().html('<strong>' + questions[i].choices[0] + '</strong>');
+                $('#choice1').prop('checked', false).next().html('<strong>' + questions[i].choices[1] + '</strong>');
+                $('#choice2').prop('checked', false).next().html('<strong>' + questions[i].choices[2] + '</strong>');
+                $('#choice3').prop('checked', false).next().html('<strong>' + questions[i].choices[3] + '</strong>');
             } else {
                 alert('Please select an answer.');
             }
@@ -110,11 +112,27 @@ $(document).ready( function() {
         if (i > 0) {
             i -= 1;
             quiz.find('.quiz-question').show().html('<br>' + '<h2>' + questions[i].question + '</h2>');
-            $('#choice1').next().html('<strong>' + questions[i].choices[0] + '</strong>');
-            $('#choice2').next().html('<strong>' + questions[i].choices[1] + '</strong>');
-            $('#choice3').next().html('<strong>' + questions[i].choices[2] + '</strong>');
-            $('#choice4').next().html('<strong>' + questions[i].choices[3] + '</strong>');
+            $('#choice0').next().html('<strong>' + questions[i].choices[0] + '</strong>');
+            $('#choice1').next().html('<strong>' + questions[i].choices[1] + '</strong>');
+            $('#choice2').next().html('<strong>' + questions[i].choices[2] + '</strong>');
+            $('#choice3').next().html('<strong>' + questions[i].choices[3] + '</strong>');
         }
+
+        switch (userAnswer[i]) {
+            case '0':
+                $('#choice0').prop('checked', true);
+                break;
+            case '1':
+                $('#choice1').prop('checked', true);
+                break;
+            case '2':
+                $('#choice2').prop('checked', true);
+                break;
+            case '3':
+                $('#choice3').prop('checked', true);
+                break;
+        }
+
     });
 
     $('#btn-submit').on('click', function() {
@@ -128,6 +146,9 @@ $(document).ready( function() {
         $("#finish").hide();
         $("#grade").show();
         $("#grade-percent").text((score/(answerKey.length))*100 + '%');
+
+        // @lob Use a switch instead of if/else
+
         if (score === 10) {
             $("#ten").show();
         } else if (score === 9) {
@@ -155,8 +176,8 @@ $(document).ready( function() {
 
     quiz.find('.quiz-choices').show();
     quiz.find('.quiz-question').show().html('<br>' + '<h2>' + questions[i].question + '</h2>');
-    $('#choice1').next().html('<strong>'+questions[i].choices[0]+'</strong>');
-    $('#choice2').next().html('<strong>'+questions[i].choices[1]+'</strong>');
-    $('#choice3').next().html('<strong>'+questions[i].choices[2]+'</strong>');
-    $('#choice4').next().html('<strong>'+questions[i].choices[3]+'</strong>');
+    $('#choice0').prop('checked', false).next().html('<strong>'+questions[i].choices[0]+'</strong>');
+    $('#choice1').prop('checked', false).next().html('<strong>'+questions[i].choices[1]+'</strong>');
+    $('#choice2').prop('checked', false).next().html('<strong>'+questions[i].choices[2]+'</strong>');
+    $('#choice3').prop('checked', false).next().html('<strong>'+questions[i].choices[3]+'</strong>');
 });
