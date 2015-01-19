@@ -67,7 +67,9 @@ $(document).ready( function() {
             selected = $("input[name=question]:checked").val();
             userAnswer.splice(i, 1, selected);
             questions[i].answered = true;
-            $("#btn-next").show();
+            $("#btn-next").show().animate({
+                "top": "-10px"
+            });;
         });
     }
     getSelected();
@@ -87,9 +89,11 @@ $(document).ready( function() {
             ch3.prop('checked', false).next().html('<strong>' + questions[i].choices[3] + '</strong>');
             setChecked();
             getSelected();
-            $("#btn-prev").show();
+            $("#btn-prev").show().animate({
+                "top": "-10px"
+            });
         } else {
-            userAnswer.push(selected);
+            getSelected();
             quiz.find('.quiz-question').hide();
             quiz.find('.quiz-choices').hide();
             $("#finish").show();
@@ -128,8 +132,10 @@ $(document).ready( function() {
         gradePercent = Math.floor((score/answerKey.length)*100);
         $('#btn-submit').hide();
         $("#finish").hide();
-        $("#grade").show();
+        $(".quiz-question").hide();
+        $(".quiz-choices").hide();
         $("#grade-percent").text(gradePercent + '%');
+        $("#grade").show();
 
         if (gradePercent >= 95) {
             $("#ten").show();
