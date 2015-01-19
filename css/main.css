@@ -97,6 +97,8 @@ textarea {
    Lobsterhands' custom styles
    ========================================================================== */
 
+/* @lob Use some SASS for color variables */
+
 body {
     background: #885D33;
     user-select: none;
