@@ -7,7 +7,8 @@ var $,
     answerKey,
     userAnswer,
     selected,
-    score;
+    score,
+    gradePercent;
 
 question = function(question, choices, answer) {
     return {question:question, choices:choices, answer:answer, answered:false};
@@ -30,19 +31,11 @@ answerKey = [];
 userAnswer = [];
 i = 0;
 score = questions.length;
+console.log(score);
 
 questions.forEach(function(element){
     answerKey.push(element.answer);
 });
-
-function getSelected() {
-    if (!questions[i].answered) {
-        $('#quiz-form').on('change', function () {
-            selected = $("input[name=question]:checked").val();
-            $("#btn-next").show();
-        });
-    }
-}
 
 $(document).ready( function() {
 
@@ -52,6 +45,34 @@ $(document).ready( function() {
     var ch2 = $('#choice2');
     var ch3 = $('#choice3');
 
+    function setChecked() {
+        switch (userAnswer[i]) {
+            case '0':
+                ch0.prop('checked', true);
+                break;
+            case '1':
+                ch1.prop('checked', true);
+                break;
+            case '2':
+                ch2.prop('checked', true);
+                break;
+            case '3':
+                ch3.prop('checked', true);
+                break;
+        }
+    }
+
+    function getSelected() {
+        if (!questions[i].answered) {
+            $("#btn-next").hide();
+        }
+        $('#quiz-form').on('change', function () {
+            selected = $("input[name=question]:checked").val();
+            userAnswer.splice(i, 1, selected);
+            questions[i].answered = true;
+            $("#btn-next").show();
+        });
+    }
     getSelected();
 
     // @Lob add 'are you sure' button before the end of the quiz.
@@ -60,11 +81,9 @@ $(document).ready( function() {
 
     // @lob Enable an on('change') of a new value to update the userAnswer[i]; currently not working
 
+    // @lob Add animation to buttons as they show / hide
+
     $('#btn-next').on('click', function() {
-        if (!questions[i].answered) {
-            userAnswer.splice(i, 1, selected);
-            questions[i].answered = true;
-        }
         if (i < answerKey.length-1) {
             i += 1;
             quiz.find('.quiz-question').show().html('<br>' + '<h2>' + questions[i].question + '</h2>');
@@ -72,26 +91,9 @@ $(document).ready( function() {
             ch1.prop('checked', false).next().html('<strong>' + questions[i].choices[1] + '</strong>');
             ch2.prop('checked', false).next().html('<strong>' + questions[i].choices[2] + '</strong>');
             ch3.prop('checked', false).next().html('<strong>' + questions[i].choices[3] + '</strong>');
-            switch (userAnswer[i]) {
-                case '0':
-                    $('#choice0').prop('checked', true);
-                    break;
-                case '1':
-                    ch1.prop('checked', true);
-                    break;
-                case '2':
-                    ch2.prop('checked', true);
-                    break;
-                case '3':
-                    ch3.prop('checked', true);
-                    break;
-                default:
-                    break;
-            }
-            if (!questions[i].answered) {
-                $("#btn-next").hide();
-            }
+            setChecked();
             $("#btn-prev").show();
+            getSelected();
         } else {
             userAnswer.push(selected);
             quiz.find('.quiz-question').hide();
@@ -101,7 +103,6 @@ $(document).ready( function() {
             $("#btn-prev").hide();
             $("#btn-submit").show();
         }
-        getSelected();
     });
 
 
@@ -120,21 +121,7 @@ $(document).ready( function() {
                 $("#btn-prev").hide()
             }
         }
-
-        switch (userAnswer[i]) {
-            case '0':
-                ch0.prop('checked', true);
-                break;
-            case '1':
-                ch1.prop('checked', true);
-                break;
-            case '2':
-                ch2.prop('checked', true);
-                break;
-            case '3':
-                ch3.prop('checked', true);
-                break;
-        }
+        setChecked();
         getSelected();
     });
 
@@ -145,33 +132,32 @@ $(document).ready( function() {
                 score -= 1;
             }
         }
+        gradePercent = Math.floor((score/answerKey.length)*100);
+
         $('#btn-submit').hide();
         $("#finish").hide();
         $("#grade").show();
-        $("#grade-percent").text((score/(answerKey.length))*100 + '%');
+        $("#grade-percent").text(gradePercent + '%');
 
-        // @lob Use a switch instead of if/else
-        // @lob Change score to percentage based (100%, >= 90%, etc.)
-
-        if (score === 10) {
+        if (gradePercent >= 95) {
             $("#ten").show();
-        } else if (score === 9) {
+        } else if (gradePercent >= 85) {
             $("#nine").show();
-        } else if (score === 8) {
+        } else if (gradePercent >= 75) {
             $("#eight").show();
-        } else if (score === 7) {
+        } else if (gradePercent >= 70) {
             $("#seven").show();
-        } else if (score === 6) {
+        } else if (gradePercent >= 60) {
             $("#six").show();
-        } else if (score === 5) {
+        } else if (gradePercent >= 50) {
             $("#five").show();
-        } else if (score === 4) {
+        } else if (gradePercent >= 40) {
             $("#four").show();
-        } else if (score === 3) {
+        } else if (gradePercent >= 30) {
             $("#three").show();
-        } else if (score === 2) {
+        } else if (gradePercent >= 20) {
             $("#two").show();
-        } else if (score === 1) {
+        } else if (gradePercent >= 10) {
             $("#one").show();
         } else {
             $("#zero").show();
@@ -185,5 +171,3 @@ $(document).ready( function() {
     ch2.prop('checked', false).next().html('<strong>'+questions[i].choices[2]+'</strong>');
     ch3.prop('checked', false).next().html('<strong>'+questions[i].choices[3]+'</strong>');
 });
-
-// @lob Add missed questions review after grade is shown
