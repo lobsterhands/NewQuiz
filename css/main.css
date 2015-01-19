@@ -100,13 +100,13 @@ textarea {
 /* @lob Use some SASS for color variables */
 
 body {
-    background: #885D33;
+    background: #4B7F52;
     user-select: none;
 }
 
 #quiz-title {
     margin-top: 40px;
-    color: #EBCFB4;
+    color: #D9EFC2;
 
 }
 
@@ -119,8 +119,7 @@ h1 {
     margin: 20px auto;
     width: 450px;
     height: 300px;
-    border: 1px solid #000000;
-    background: #ffffff;
+    background: #fff;
 }
 
 .quiz-question {
@@ -179,7 +178,9 @@ input[type=radio] {
 
 #btn-next .btn,
 #btn-prev .btn {
-    background: #CA6808;
+    background: #ACD6AB;
+    font-weight: 600;
+    font-size: 1.2em;
 }
 
 #btn-finish .btn {
