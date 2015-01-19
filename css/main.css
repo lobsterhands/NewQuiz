@@ -141,17 +141,20 @@ input[type=radio] {
 
 #buttons {
     margin: auto;
+    position: relative;
     max-width: 450px;
 }
 
 #btn-next,
 #btn-finish {
     display: none;
+    position: relative;
     float: right;
 }
 
 #btn-prev {
     display: none;
+    position: relative;
     float: left;
 }
 
@@ -163,7 +166,9 @@ input[type=radio] {
 
 #btn-submit input[type=submit] {
     background: #AD835A;
+    /*position: relative;*/
     color: #EBCFB4;
+    font-size: 1em;
     padding: 1em;
 }
 
@@ -190,13 +195,13 @@ input[type=radio] {
 
 #finish {
     display: none;
-    margin: 7em auto;
+    margin: auto;
     text-align: center;
 }
 
 #grade {
     display: none;
-    margin: 5em auto;
+    margin: auto;
     text-align: center;
 }
 
