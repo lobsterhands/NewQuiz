@@ -1,7 +1,5 @@
 var $,
     i,
-    j,
-    k,
     question,
     questions,
     answerKey,
@@ -31,7 +29,6 @@ answerKey = [];
 userAnswer = [];
 i = 0;
 score = questions.length;
-console.log(score);
 
 questions.forEach(function(element){
     answerKey.push(element.answer);
@@ -76,11 +73,8 @@ $(document).ready( function() {
     getSelected();
 
     // @Lob add 'are you sure' button before the end of the quiz.
-
     // @Lob add 'reset' button after grade is shown
-
     // @lob Enable an on('change') of a new value to update the userAnswer[i]; currently not working
-
     // @lob Add animation to buttons as they show / hide
 
     $('#btn-next').on('click', function() {
@@ -92,8 +86,8 @@ $(document).ready( function() {
             ch2.prop('checked', false).next().html('<strong>' + questions[i].choices[2] + '</strong>');
             ch3.prop('checked', false).next().html('<strong>' + questions[i].choices[3] + '</strong>');
             setChecked();
-            $("#btn-prev").show();
             getSelected();
+            $("#btn-prev").show();
         } else {
             userAnswer.push(selected);
             quiz.find('.quiz-question').hide();
@@ -104,7 +98,6 @@ $(document).ready( function() {
             $("#btn-submit").show();
         }
     });
-
 
     $('#btn-prev').on('click', function() {
         if (i >= 0) {
@@ -126,14 +119,13 @@ $(document).ready( function() {
     });
 
     $('#btn-submit').on('click', function() {
-        // @lob Update this loop as an array.forEach
-        for (k = 0; k < answerKey.length; k++) {
-            if (answerKey[k] != userAnswer[k]) {
+        answerKey.forEach(function(element, index){
+            if (element != userAnswer[index]) {
                 score -= 1;
             }
-        }
-        gradePercent = Math.floor((score/answerKey.length)*100);
+        });
 
+        gradePercent = Math.floor((score/answerKey.length)*100);
         $('#btn-submit').hide();
         $("#finish").hide();
         $("#grade").show();
@@ -164,6 +156,7 @@ $(document).ready( function() {
         }
     });
 
+    // Initialize the quiz from Question 1
     quiz.find('.quiz-choices').show();
     quiz.find('.quiz-question').show().html('<br>' + '<h2>' + questions[i].question + '</h2>');
     ch0.prop('checked', false).next().html('<strong>'+questions[i].choices[0]+'</strong>');
