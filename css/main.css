@@ -100,7 +100,7 @@ textarea {
 /* @lob Use some SASS for color variables */
 
 body {
-    background: #4B7F52;
+    background: #68AD68;
     user-select: none;
 }
 
@@ -183,7 +183,7 @@ input[type=radio] {
 
 #btn-next .btn,
 #btn-prev .btn {
-    background: #ACD6AB;
+    background: #D9EFC2;
     font-weight: 600;
     font-size: 1.2em;
 }
