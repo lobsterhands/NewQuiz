@@ -13,14 +13,14 @@ question = function(question, choices, answer) {
 };
 
 questions = [
-    question("What is my middle name?", ["Sylvester", "Patrick", "Aaron", "David"], 1),
-    question("How old am I?", ["29", "27", "30", "28"], 0),
-    question("In what state was I born?", ["Idaho", "Tampa", "North Carolina", "California"], 3),
-    question("I served in this branch of the military:",["Air Force", "Army", "Navy", "Marines"], 0),
-    question("This is my nervous habit:", ["Blinking too much", "Poor eye contact", "Cracking knuckles", "I'm never nervous"], 2),
-    question("What is my trail name?", ["Landlocked", "Ambassador", "Moonbeam", "Young Man Winter"], 1),
-    question("How many siblings do I have?", ["0", "1", "3", "4"], 3),
-    question("All of these are my hobbies except:", ["Stamp collecting", "Playing guitar", "Programming", "Board Games"], 0),
+    //question("What is my middle name?", ["Sylvester", "Patrick", "Aaron", "David"], 1),
+    //question("How old am I?", ["29", "27", "30", "28"], 0),
+    //question("In what state was I born?", ["Idaho", "Tampa", "North Carolina", "California"], 3),
+    //question("I served in this branch of the military:",["Air Force", "Army", "Navy", "Marines"], 0),
+    //question("This is my nervous habit:", ["Blinking too much", "Poor eye contact", "Cracking knuckles", "I'm never nervous"], 2),
+    //question("What is my trail name?", ["Landlocked", "Ambassador", "Moonbeam", "Young Man Winter"], 1),
+    //question("How many siblings do I have?", ["0", "1", "3", "4"], 3),
+    //question("All of these are my hobbies except:", ["Stamp collecting", "Playing guitar", "Programming", "Board Games"], 0),
     question("What is my favorite movie?", ["Titanic", "The Matrix", "The Royal Tenenbaums", "Inception"], 2),
     question("What is my favorite work of fiction?", ["A Wizard of Earthsea", "Harry Potter (all of them)", "The Lord of the Rings", "The Bible"], 0)
 ];
@@ -41,6 +41,13 @@ $(document).ready( function() {
     var ch1 = $('#choice1');
     var ch2 = $('#choice2');
     var ch3 = $('#choice3');
+
+    function unCheckAll() {
+        ch0.prop('checked', false).next().html('<strong>' + questions[i].choices[0] + '</strong>');
+        ch1.prop('checked', false).next().html('<strong>' + questions[i].choices[1] + '</strong>');
+        ch2.prop('checked', false).next().html('<strong>' + questions[i].choices[2] + '</strong>');
+        ch3.prop('checked', false).next().html('<strong>' + questions[i].choices[3] + '</strong>');
+    }
 
     function setChecked() {
         switch (userAnswer[i]) {
@@ -77,16 +84,12 @@ $(document).ready( function() {
     // @Lob add 'are you sure' button before the end of the quiz.
     // @Lob add 'reset' button after grade is shown
     // @lob Enable an on('change') of a new value to update the userAnswer[i]; currently not working
-    // @lob Add animation to buttons as they show / hide
 
     $('#btn-next').on('click', function() {
         if (i < answerKey.length-1) {
             i += 1;
             quiz.find('.quiz-question').show().html('<br>' + '<h2>' + questions[i].question + '</h2>');
-            ch0.prop('checked', false).next().html('<strong>' + questions[i].choices[0] + '</strong>');
-            ch1.prop('checked', false).next().html('<strong>' + questions[i].choices[1] + '</strong>');
-            ch2.prop('checked', false).next().html('<strong>' + questions[i].choices[2] + '</strong>');
-            ch3.prop('checked', false).next().html('<strong>' + questions[i].choices[3] + '</strong>');
+            unCheckAll();
             setChecked();
             getSelected();
             $("#btn-prev").show().animate({
@@ -122,7 +125,7 @@ $(document).ready( function() {
         getSelected();
     });
 
-    $('#btn-submit').on('click', function() {
+    $('#btn-submit').find('.btn').on('click', function() {
         answerKey.forEach(function(element, index){
             if (element != userAnswer[index]) {
                 score -= 1;
@@ -165,8 +168,5 @@ $(document).ready( function() {
     // Initialize the quiz from Question 1
     quiz.find('.quiz-choices').show();
     quiz.find('.quiz-question').show().html('<br>' + '<h2>' + questions[i].question + '</h2>');
-    ch0.prop('checked', false).next().html('<strong>'+questions[i].choices[0]+'</strong>');
-    ch1.prop('checked', false).next().html('<strong>'+questions[i].choices[1]+'</strong>');
-    ch2.prop('checked', false).next().html('<strong>'+questions[i].choices[2]+'</strong>');
-    ch3.prop('checked', false).next().html('<strong>'+questions[i].choices[3]+'</strong>');
+    unCheckAll();
 });
